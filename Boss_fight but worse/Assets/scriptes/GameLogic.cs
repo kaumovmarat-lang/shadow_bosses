@@ -1,0 +1,317 @@
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class GameLogic : MonoBehaviour
+{
+    public Text makarov;
+    public int i = 0;
+    public dontdestroy PlayerStats;
+    public Text hint;
+    public AudioSource music;
+    public GameObject text_background;
+    public Text hp;
+    public Text hp_Vrag;
+    public int scene = 0;
+    public GameObject character_alive;
+    public GameObject character_attack;
+    public GameObject character_dead;
+    public GameObject monster_alive;
+    public GameObject monster_attack;
+    public AudioSource victory;
+    public AudioSource aud_fight;
+    public videoscript Return;
+    public GameObject rock;
+    public GameObject paper;
+    public GameObject scissors;
+    public GameObject fightButton;
+    public GameObject select;
+    public Text text;
+    public int hod = 0;
+    public int vibor = 1;
+    public int HP;
+    public int damage;
+    public int evildamage = 30;
+    int[] monster_hp = { 200, 250, 300, 350, 400};
+    public int monster = 0;
+    
+    public int[] player = {0, 0, 0, 0, 0 };
+    int[] first = { 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3 };
+    int[] second = { 3, 1, 2, 3, 2, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 2, 1 };
+    int[] third = { 1, 2, 3, 2, 1, 3, 3, 2, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 3 };
+    int[] fourth = { 2, 3, 1, 1, 2, 3, 2, 1, 3, 3, 1, 2, 2, 3, 1, 1, 3, 2, 3, 1, 2, 2, 1, 3, 1, 2, 3, 3, 2, 1, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3 };
+    int[] fifth = { 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 3, 2, 2, 3, 1, 3, 1, 2, 2, 1, 3, 1, 2, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 2 };
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        PlayerStats = GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>();
+        HP = PlayerStats.maxHP;
+        damage = PlayerStats.attack;
+        hp.text = HP.ToString();
+        hp_Vrag.text = monster_hp[monster].ToString();
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public void chooserock()
+    {
+        if (i >= player.Length)
+        {
+            makarov.text = "Максимум действий достигнут.";
+        }
+        else
+        {
+            vibor = 1;
+            select.transform.position = rock.transform.position;
+            player[i] = vibor;
+            i++;
+        }
+    }
+    public void choosepaper()
+    {
+        if (i >= player.Length)
+        {
+            makarov.text = "Максимум действий достигнут.";
+        }
+        else
+        {
+            vibor = 2;
+            select.transform.position = paper.transform.position;
+            player[i] = vibor;
+            i++;
+        }
+    }
+    public void choosescissors()
+    {
+        if (i >= player.Length)
+        {
+            makarov.text = "Максимум действий достигнут.";
+        }
+        else
+        {
+            vibor = 3;
+            select.transform.position = scissors.transform.position;
+            player[i] = vibor;
+            i++;
+        }
+    }
+    public void StartFight() {
+        if (i >= 5)
+        {
+            StartCoroutine(fight());
+        }
+        else { makarov.text = "Действий должно быть всего 5"; }
+    }
+    public IEnumerator fight()
+    {
+        makarov.text = "";
+        text.text = "";
+        aud_fight.Play();
+        text_background.SetActive(false);
+        character_alive.SetActive(false);
+        character_attack.SetActive(true);
+        monster_alive.SetActive(false);
+        monster_attack.SetActive(true);
+        rock.SetActive(false);
+        paper.SetActive(false);
+        scissors.SetActive(false);
+        select.SetActive(false);
+        fightButton.SetActive(false);
+        int result = 0;
+        for (int a = 0; a < player.Length; a++)
+        {
+            if (monster == 0)
+            {
+                result = game(player[a], first[hod]);
+            }
+            else if (monster == 1)
+            {
+                result = game(player[a], second[hod]);
+
+            }
+            else if (monster == 2)
+            {
+                result = game(player[a], third[hod]);
+            }
+            else if (monster == 3)
+            {
+                result = game(player[a], fourth[hod]);
+            }
+            else { result = game(player[a], fifth[hod]); }
+            hod++;
+            yield return new WaitForSeconds(3);
+            switch (result)
+            {
+                case 0:
+                    HP -= 10;
+                    monster_hp[monster] -= damage;
+                    text.text = $"Ничья!\nВы нанесли {damage} урона и получили 10 урона!";
+                    break;
+                case 1:
+                    monster_hp[monster] -= damage * 2;
+                    text.text = $"Чудесная Атака!\nВы нанесли {damage * 2} урона!";
+                    break;
+                case 2:
+                    HP -= evildamage;
+                    text.text = $"Плохая Атака...\nВы получили {evildamage} урона!";
+                    break;
+                case 4:
+                    Console.WriteLine("Ошибка?");
+                    break;
+            }
+            aud_fight.Stop();
+            hp.text = HP.ToString();
+            hp_Vrag.text = monster_hp[monster].ToString();
+            text_background.SetActive(true);
+            if (monster_hp[monster] <= 0)
+            {
+                music.volume = 0.1f;
+                monster_attack.SetActive(false);
+                monster_alive.SetActive(false);
+                victory.Play();
+                text.text = "ПОБЕДА!";
+                hod = 0;
+                StartCoroutine(waiter_victory(3));
+
+            }
+            else if (HP <= 0)
+            {
+                PlayerPrefs.SetInt("deathTurn", hod);
+                PlayerPrefs.Save();
+                character_attack.SetActive(false);
+                character_alive.SetActive(false);
+                character_dead.SetActive(true);
+                text.text = "Вы проиграли..!";
+                music.volume = 0.1f;
+                StartCoroutine(waiter_dead(3));
+
+            }
+            else
+            {
+                
+                int deathTurn = PlayerPrefs.GetInt("deathTurn", -1);
+                Console.WriteLine("Сейчас ход " + hod + ", Подсказка в " + deathTurn);
+                if (hod == (deathTurn - 1))
+                {
+                    if (monster == 0)
+                    {
+                        switch (first[hod])
+                        {
+                            case 1:
+                                hint.text = $"Враг использует Быструю атаку...";
+                                break;
+                            case 2:
+                                hint.text = $"Враг использует Тяжелую атаку...";
+                                break;
+                            case 3:
+                                hint.text = $"Враг использует Контратаку...";
+                                break;
+                        }
+                    }
+                    else if (monster == 1)
+                    {
+                        switch (second[hod])
+                        {
+                            case 1:
+                                hint.text = $"Враг использует Быструю атаку...";
+                                break;
+                            case 2:
+                                hint.text = $"Враг использует Тяжелую атаку...";
+                                break;
+                            case 3:
+                                hint.text = $"Враг использует Контратаку...";
+                                break;
+                        }
+
+                    }
+                    else if (monster == 2)
+                    {
+                        switch (third[hod])
+                        {
+                            case 1:
+                                hint.text = $"Враг использует Быструю атаку...";
+                                break;
+                            case 2:
+                                hint.text = $"Враг использует Тяжелую атаку...";
+                                break;
+                            case 3:
+                                hint.text = $"Враг использует Контратаку...";
+                                break;
+                        }
+                    }
+                    else if (monster == 3)
+                    {
+                        switch (fourth[hod])
+                        {
+                            case 1:
+                                hint.text = $"Враг использует Быструю атаку...";
+                                break;
+                            case 2:
+                                hint.text = $"Враг использует Тяжелую атаку...";
+                                break;
+                            case 3:
+                                hint.text = $"Враг использует Контратаку...";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (fifth[hod])
+                        {
+                            case 1:
+                                hint.text = $"Враг использует Контратаку...";
+                                break;
+                            case 2:
+                                hint.text = $"Враг использует Быструю атаку...";
+                                break;
+                            case 3:
+                                hint.text = $"Враг использует Тяжелую атаку...";
+                                break;
+                        }
+                    }
+
+                }
+                else { hint.text = ""; }
+            }
+        }
+        for (int a = 0; a < player.Length; a++)
+        {
+            player[a] = 0;
+        }
+            i = 0;
+        monster_alive.SetActive(true);
+        monster_attack.SetActive(false);
+        character_alive.SetActive(true);
+        character_attack.SetActive(false);
+        rock.SetActive(true);
+        paper.SetActive(true);
+        scissors.SetActive(true);
+        select.SetActive(true);
+        fightButton.SetActive(true);
+        text_background.SetActive(false);
+        text.text = "";
+    }
+    public int game(int x, int y)
+    {
+        if (x == y) { return 0; }
+        else if ((x == 1 && y == 2) || (x == 2 && y == 3) || (x == 3 && y == 1)) { return 1; }
+        else if ((y == 1 && x == 2) || (y == 2 && x == 3) || (y == 3 && x == 1)) { return 2; }
+        else { return 4; }
+    }
+    IEnumerator waiter_dead(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        music.volume = 0;
+        Return.ReturnByDeath();
+    }
+
+    IEnumerator waiter_victory(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        SceneManager.LoadScene(scene+1);
+    }
+}
