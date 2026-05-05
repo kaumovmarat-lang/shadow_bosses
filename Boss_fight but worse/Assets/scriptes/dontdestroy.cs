@@ -4,14 +4,15 @@ using UnityEngine.SceneManagement;
 public class dontdestroy : MonoBehaviour
 {
     public int attack = 15;
-    public int maxHP = 100;
+    public double maxHP = 100;
+    public bool bron = false;
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-    public void play()
+    public void play(int a)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(a);
     }
 
     public void AddAttack(int value)
@@ -23,5 +24,9 @@ public class dontdestroy : MonoBehaviour
     {
        maxHP += value;
     }
+    public void AddBronya()
+    {
+        bron = true;
     }
+}
 

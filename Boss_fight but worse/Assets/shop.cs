@@ -12,22 +12,22 @@ public class shop : MonoBehaviour
     public void Upgrade1()
     {
         vibor = 1;
-        text.text = "+5 к Атаке, теперь ты будешь сражаться немного лучше, чем раньше";
+        text.text = "+5 к Атаке, теперь ты будешь сражаться немного лучше, чем раньше.";
     }
     public void Upgrade2()
     {
         vibor = 2;
-        text.text = "+20 к твоему макс. здоровью, Врагам будет немного сложнее тебя убить";
+        text.text = "+20 к твоему макс. здоровью, Врагам будет немного сложнее тебя убить.";
     }
     public void Upgrade3()
     {
         vibor = 3;
-        text.text = "Рамис еще не придумал";
+        text.text = "Доспехи. Ты будешь получать на -10% урона меньше  от врага.";
     }
    public void Upgrade4()
     {
         vibor = 4;
-        text.text = "Рамис еще не придумал";
+        text.text = "Возрождение. В случае поражения, ты верншься к тому моменту боя, где умер.";
     }
     public void Buy()
     {
@@ -45,7 +45,7 @@ public class shop : MonoBehaviour
         }
         else if (vibor == 3)
         {
-            //GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>().AddAttack(10);
+            GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>().AddBronya();
         }
         else if (vibor == 4)
         {

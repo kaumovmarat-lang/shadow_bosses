@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
+    public bool bronya = false;
     public Text makarov;
     public int i = 0;
     public dontdestroy PlayerStats;
@@ -31,9 +32,9 @@ public class GameLogic : MonoBehaviour
     public Text text;
     public int hod = 0;
     public int vibor = 1;
-    public int HP;
+    public double HP;
     public int damage;
-    public int evildamage = 30;
+    public double evildamage = 30;
     int[] monster_hp = { 200, 250, 300, 350, 400};
     public int monster = 0;
     
@@ -49,6 +50,7 @@ public class GameLogic : MonoBehaviour
         PlayerStats = GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>();
         HP = PlayerStats.maxHP;
         damage = PlayerStats.attack;
+        bronya = PlayerStats.bron;
         hp.text = HP.ToString();
         hp_Vrag.text = monster_hp[monster].ToString();
     }
@@ -147,18 +149,32 @@ public class GameLogic : MonoBehaviour
             switch (result)
             {
                 case 0:
-                    HP -= 10;
-                    monster_hp[monster] -= damage;
-                    text.text = $"Ничья!\nВы нанесли {damage} урона и получили 10 урона!";
+                    if (bronya) {
+                        HP -= 10 * 0,9;
+                        monster_hp[monster] -= damage;
+                        text.text = $"Ничья!\nВы нанесли {damage} урона и получили 9 урона!";
+                    }
+                    else {
+                        HP -= 10;
+                        monster_hp[monster] -= damage;
+                        text.text = $"Ничья!\nВы нанесли {damage} урона и получили 10 урона!";
+                    }                        
                     break;
                 case 1:
                     monster_hp[monster] -= damage * 2;
                     text.text = $"Чудесная Атака!\nВы нанесли {damage * 2} урона!";
                     break;
                 case 2:
-                    HP -= evildamage;
-                    text.text = $"Плохая Атака...\nВы получили {evildamage} урона!";
-                    break;
+                    if (bronya) {
+                        HP -= evildamage * 0.9;
+                        text.text = $"Плохая Атака...\nВы получили {evildamage * 0.9} урона!";
+                    }
+                    else
+                    {
+                        HP -= evildamage;
+                        text.text = $"Плохая Атака...\nВы получили {evildamage} урона!";
+                    }
+                        break;
                 case 4:
                     Console.WriteLine("Ошибка?");
                     break;
@@ -297,9 +313,9 @@ public class GameLogic : MonoBehaviour
     }
     public int game(int x, int y)
     {
-        if (x == y) { return 0; }
-        else if ((x == 1 && y == 2) || (x == 2 && y == 3) || (x == 3 && y == 1)) { return 1; }
-        else if ((y == 1 && x == 2) || (y == 2 && x == 3) || (y == 3 && x == 1)) { return 2; }
+        if (x == y) { return 0; } //ничья
+        else if ((x == 1 && y == 2) || (x == 2 && y == 3) || (x == 3 && y == 1)) { return 1; } //поражение
+        else if ((y == 1 && x == 2) || (y == 2 && x == 3) || (y == 3 && x == 1)) { return 2; } //победа
         else { return 4; }
     }
     IEnumerator waiter_dead(float sec)
