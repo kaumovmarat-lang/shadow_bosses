@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
+    
+    public GameObject pos1;
+    public GameObject pos2;
+    public GameObject pos3;
+    public GameObject pos4;
+    public GameObject pos5;
+    public GameObject prefab1; //быстрая
+    public GameObject prefab2; //тяжелая
+    public GameObject prefab3; //контр
     public AudioSource second_chance_sound;
     public bool chance = false;
     public bool bronya = false; //броня вкл/выкл
@@ -70,6 +79,7 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
+            
             vibor = 1;
             select.transform.position = rock.transform.position;
             player[i] = vibor;
@@ -84,6 +94,7 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
+
             vibor = 2;
             select.transform.position = paper.transform.position;
             player[i] = vibor;
@@ -98,6 +109,7 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
+            
             vibor = 3;
             select.transform.position = scissors.transform.position;
             player[i] = vibor;

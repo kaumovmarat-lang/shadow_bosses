@@ -821,6 +821,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217e23bb843377f40ac8639603cac872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  pos1: {fileID: 284151657}
+  pos2: {fileID: 93887957}
+  pos3: {fileID: 1855760168}
+  pos4: {fileID: 1919286281}
+  pos5: {fileID: 954009368}
+  prefab1: {fileID: 326653734665314179, guid: abe9ea9eece37354d94792b150832091, type: 3}
+  prefab2: {fileID: 7602094870604865117, guid: e4e5506ca4aeda74eadd3ccb3cb01b49, type: 3}
+  prefab3: {fileID: 6303307862132085356, guid: 49ac6be26133c5e4c9a3b47a684baad4, type: 3}
   second_chance_sound: {fileID: 872344683}
   chance: 0
   bronya: 0
@@ -2043,7 +2051,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0414\u0435\u0439\u0441\u0432\u0442\u0438\u044F \u0432 \u043E\u0447\u0435\u0440\u0435\u0434\u0438:"
+  m_Text: "\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F \u0432 \u043E\u0447\u0435\u0440\u0435\u0434\u0438:"
 --- !u!222 &1000135471
 CanvasRenderer:
   m_ObjectHideFlags: 0
