@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
-    
+    public Transform trans;
     public GameObject pos1;
     public GameObject pos2;
     public GameObject pos3;
@@ -79,7 +79,24 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
-            
+            switch (i)
+            {
+                case 0:
+                    Instantiate(prefab1, pos1.transform.position, Quaternion.identity, trans);
+                    break;
+                case 1:
+                    Instantiate(prefab1, pos2.transform.position, Quaternion.identity, trans);
+                    break;
+                case 2:
+                    Instantiate(prefab1, pos3.transform.position, Quaternion.identity, trans);
+                    break;
+                case 3:
+                    Instantiate(prefab1, pos4.transform.position, Quaternion.identity, trans);
+                    break;
+                case 4:
+                    Instantiate(prefab1, pos5.transform.position, Quaternion.identity, trans);
+                    break;
+            }
             vibor = 1;
             select.transform.position = rock.transform.position;
             player[i] = vibor;
@@ -94,7 +111,24 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
-
+            switch (i)
+            {
+                case 0:
+                    Instantiate(prefab2, pos1.transform.position, Quaternion.identity, trans);
+                    break;
+                case 1:
+                    Instantiate(prefab2, pos2.transform.position, Quaternion.identity, trans);
+                    break;
+                case 2:
+                    Instantiate(prefab2, pos3.transform.position, Quaternion.identity, trans);
+                    break;
+                case 3:
+                    Instantiate(prefab2, pos4.transform.position, Quaternion.identity, trans);
+                    break;
+                case 4:
+                    Instantiate(prefab2, pos5.transform.position, Quaternion.identity, trans);
+                    break;
+            }
             vibor = 2;
             select.transform.position = paper.transform.position;
             player[i] = vibor;
@@ -109,7 +143,24 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
-            
+            switch (i)
+            {
+                case 0:
+                    Instantiate(prefab3, pos1.transform.position, Quaternion.identity, trans);
+                    break;
+                case 1:
+                    Instantiate(prefab3, pos2.transform.position, Quaternion.identity, trans);
+                    break;
+                case 2:
+                    Instantiate(prefab3, pos3.transform.position, Quaternion.identity, trans);
+                    break;
+                case 3:
+                    Instantiate(prefab3, pos4.transform.position, Quaternion.identity, trans);
+                    break;
+                case 4:
+                    Instantiate(prefab3, pos5.transform.position, Quaternion.identity);
+                    break;
+            }
             vibor = 3;
             select.transform.position = scissors.transform.position;
             player[i] = vibor;

@@ -250,6 +250,7 @@ MonoBehaviour:
   attack: 15
   maxHP: 100
   bron: 0
+  Chance: 0
 --- !u!4 &18621212
 Transform:
   m_ObjectHideFlags: 0
