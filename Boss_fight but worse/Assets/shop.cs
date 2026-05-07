@@ -49,7 +49,7 @@ public class shop : MonoBehaviour
         }
         else if (vibor == 4)
         {
-            //GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>().AddHP(50);
+            GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>().AddChance();
         }
         text.text = "Спасибо за покупку!\nПриходи еще!";
         StartCoroutine(waiter(3));

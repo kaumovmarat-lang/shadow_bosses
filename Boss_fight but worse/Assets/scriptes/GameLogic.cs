@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
-    
+    public AudioSource second_chance_sound;
+    public bool chance = false;
     public bool bronya = false; //броня вкл/выкл
     public Text makarov; //текст достигнут ли максимум действий
     public int i = 0; //счет действий
@@ -54,6 +55,7 @@ public class GameLogic : MonoBehaviour
         bronya = PlayerStats.bron;
         hp.text = HP.ToString();
         hp_Vrag.text = monster_hp[monster].ToString();
+        chance = PlayerStats.Chance;
     }
     // Update is called once per frame
     void Update()
@@ -197,14 +199,124 @@ public class GameLogic : MonoBehaviour
             }
             else if (HP <= 0)
             {
-                PlayerPrefs.SetInt("deathTurn", hod);
-                PlayerPrefs.Save();
-                character_attack.SetActive(false);
-                character_alive.SetActive(false);
-                character_dead.SetActive(true);
-                text.text = "Вы проиграли..!";
-                music.volume = 0.1f;
-                StartCoroutine(waiter_dead(3));
+                if (!chance) 
+                {
+                    PlayerPrefs.SetInt("deathTurn", hod);
+                    PlayerPrefs.Save();
+                    character_attack.SetActive(false);
+                    character_alive.SetActive(false);
+                    character_dead.SetActive(true);
+                    text.text = "Вы проиграли..!";
+                    music.volume = 0.1f;
+                    StartCoroutine(waiter_dead(3));
+                }
+                else
+                {
+                    second_chance_sound.Play();
+                    HP = 1;
+                    chance = false;
+                    PlayerStats.Chance = false;
+
+                    int deathTurn = PlayerPrefs.GetInt("deathTurn", -1);
+                    Console.WriteLine("Сейчас ход " + hod + ", Подсказка в " + deathTurn);
+                    if (hod == (deathTurn - 1))
+                    {
+                        if (monster == 0)
+                        {
+                            switch (first[hod])
+                            {
+                                case 1:
+                                    hint.text = $"Враг использует Быструю атаку...";
+                                    break;
+                                case 2:
+                                    hint.text = $"Враг использует Тяжелую атаку...";
+                                    break;
+                                case 3:
+                                    hint.text = $"Враг использует Контратаку...";
+                                    break;
+                            }
+                        }
+                        else if (monster == 1)
+                        {
+                            switch (second[hod])
+                            {
+                                case 1:
+                                    hint.text = $"Враг использует Быструю атаку...";
+                                    break;
+                                case 2:
+                                    hint.text = $"Враг использует Тяжелую атаку...";
+                                    break;
+                                case 3:
+                                    hint.text = $"Враг использует Контратаку...";
+                                    break;
+                            }
+
+                        }
+                        else if (monster == 2)
+                        {
+                            switch (third[hod])
+                            {
+                                case 1:
+                                    hint.text = $"Враг использует Быструю атаку...";
+                                    break;
+                                case 2:
+                                    hint.text = $"Враг использует Тяжелую атаку...";
+                                    break;
+                                case 3:
+                                    hint.text = $"Враг использует Контратаку...";
+                                    break;
+                            }
+                        }
+                        else if (monster == 3)
+                        {
+                            switch (fourth[hod])
+                            {
+                                case 1:
+                                    hint.text = $"Враг использует Быструю атаку...";
+                                    break;
+                                case 2:
+                                    hint.text = $"Враг использует Тяжелую атаку...";
+                                    break;
+                                case 3:
+                                    hint.text = $"Враг использует Контратаку...";
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (fifth[hod])
+                            {
+                                case 1:
+                                    hint.text = $"Враг использует Контратаку...";
+                                    break;
+                                case 2:
+                                    hint.text = $"Враг использует Быструю атаку...";
+                                    break;
+                                case 3:
+                                    hint.text = $"Враг использует Тяжелую атаку...";
+                                    break;
+                            }
+                        }
+
+                    }
+                    else { hint.text = ""; }
+                    for (int b = 0; b < player.Length; b++)
+                    {
+                        player[b] = 0;
+                    }
+                    i = 0;
+                    monster_alive.SetActive(true);
+                    monster_attack.SetActive(false);
+                    character_alive.SetActive(true);
+                    character_attack.SetActive(false);
+                    rock.SetActive(true);
+                    paper.SetActive(true);
+                    scissors.SetActive(true);
+                    select.SetActive(true);
+                    fightButton.SetActive(true);
+                    text_background.SetActive(false);
+                    text.text = "";
+                }
 
             }
             else

@@ -6,6 +6,7 @@ public class dontdestroy : MonoBehaviour
     public int attack = 15;
     public double maxHP = 100;
     public bool bron = false;
+    public bool Chance = false;
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -27,6 +28,10 @@ public class dontdestroy : MonoBehaviour
     public void AddBronya()
     {
         bron = true;
+    }
+    public void AddChance()
+    {
+        Chance = true;
     }
 }
 
