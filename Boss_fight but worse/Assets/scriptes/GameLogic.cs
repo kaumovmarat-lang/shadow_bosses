@@ -6,21 +6,22 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
-    public bool bronya = false;
-    public Text makarov;
-    public int i = 0;
-    public dontdestroy PlayerStats;
-    public Text hint;
-    public AudioSource music;
-    public GameObject text_background;
-    public Text hp;
-    public Text hp_Vrag;
-    public int scene = 0;
-    public GameObject character_alive;
+    
+    public bool bronya = false; //броня вкл/выкл
+    public Text makarov; //текст достигнут ли максимум действий
+    public int i = 0; //счет действий
+    public dontdestroy PlayerStats; //статы игрока (атака, хп, есть ли броня)
+    public Text hint; //подсказка при предсмертной действии
+    public AudioSource music; //музыка
+    public GameObject text_background; //фон текста
+    public Text hp; // текст хп игрорка
+    public Text hp_Vrag; // текст хп врага
+    public int scene = 0; // какая сцена
+    public GameObject character_alive; // спрайты начало ↓
     public GameObject character_attack;
     public GameObject character_dead;
     public GameObject monster_alive;
-    public GameObject monster_attack;
+    public GameObject monster_attack; 
     public AudioSource victory;
     public AudioSource aud_fight;
     public videoscript Return;
@@ -29,21 +30,21 @@ public class GameLogic : MonoBehaviour
     public GameObject scissors;
     public GameObject fightButton;
     public GameObject select;
-    public Text text;
-    public int hod = 0;
-    public int vibor = 1;
-    public double HP;
-    public int damage;
-    public double evildamage = 30;
-    int[] monster_hp = { 200, 250, 300, 350, 400};
-    public int monster = 0;
+    public Text text;                   //спрайты конец
+    public int hod = 0; //какой ход
+    public int vibor = 1; //какой выбор. !!!!По умолчанию всегда 1!!!!
+    public double HP; // хп игрока
+    public int damage; //атака игрока
+    public double evildamage = 30; //атака врага (меняется в инспекторе)
+    int[] monster_hp = { 200, 250, 300, 350, 400}; // хп врагов всех поочередно
+    public int monster = 0; // какой монстр счетчик
     
-    public int[] player = {0, 0, 0, 0, 0 };
-    int[] first = { 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3 };
+    public int[] player = {0, 0, 0, 0, 0 }; //действия игрока
+    int[] first = { 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3 }; //ходы монстров ↓
     int[] second = { 3, 1, 2, 3, 2, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 2, 1 };
     int[] third = { 1, 2, 3, 2, 1, 3, 3, 2, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 3 };
     int[] fourth = { 2, 3, 1, 1, 2, 3, 2, 1, 3, 3, 1, 2, 2, 3, 1, 1, 3, 2, 3, 1, 2, 2, 1, 3, 1, 2, 3, 3, 2, 1, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3 };
-    int[] fifth = { 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 3, 2, 2, 3, 1, 3, 1, 2, 2, 1, 3, 1, 2, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 2 };
+    int[] fifth = { 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 3, 2, 2, 3, 1, 3, 1, 2, 2, 1, 3, 1, 2, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 2 };  //ходы монстров
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -150,7 +151,7 @@ public class GameLogic : MonoBehaviour
             {
                 case 0:
                     if (bronya) {
-                        HP -= 10 * 0,9;
+                        HP -= 9;
                         monster_hp[monster] -= damage;
                         text.text = $"Ничья!\nВы нанесли {damage} урона и получили 9 урона!";
                     }
