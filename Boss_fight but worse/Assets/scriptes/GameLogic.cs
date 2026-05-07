@@ -309,6 +309,7 @@ public class GameLogic : MonoBehaviour
                     monster_attack.SetActive(false);
                     character_alive.SetActive(true);
                     character_attack.SetActive(false);
+                    character_dead.SetActive(false);
                     rock.SetActive(true);
                     paper.SetActive(true);
                     scissors.SetActive(true);
@@ -316,6 +317,7 @@ public class GameLogic : MonoBehaviour
                     fightButton.SetActive(true);
                     text_background.SetActive(false);
                     text.text = "";
+                    yield break;
                 }
 
             }
