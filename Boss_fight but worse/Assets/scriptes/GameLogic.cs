@@ -69,6 +69,7 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
     }
     public void chooserock()
@@ -192,6 +193,7 @@ public class GameLogic : MonoBehaviour
         int result = 0;
         for (int a = 0; a < player.Length; a++)
         {
+            player[a].setActive(false);
             if (monster == 0)
             {
                 result = game(player[a], first[hod]);
