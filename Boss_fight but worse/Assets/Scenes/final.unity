@@ -746,6 +746,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217e23bb843377f40ac8639603cac872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  trans: {fileID: 3965692401054922228, guid: eebe6b7100c95fe4caeab35dbc9655aa, type: 3}
+  pos1: {fileID: 6361421702146199952, guid: 15998a1ad47139244ba6aa0a751689de, type: 3}
+  pos2: {fileID: 2161430058697421020, guid: 71557d720f0e0714cb7596bd340c596f, type: 3}
+  pos3: {fileID: 3548555609558282783, guid: ade5a399a16e7004f8d11b262a99a994, type: 3}
+  pos4: {fileID: 9074895073759734834, guid: ede21dcfcb8cec44fab274ea34777307, type: 3}
+  pos5: {fileID: 961394052634301630, guid: a50c01efc4abb034a820cb051fd4aebf, type: 3}
+  prefab1: {fileID: 326653734665314179, guid: abe9ea9eece37354d94792b150832091, type: 3}
+  prefab2: {fileID: 7602094870604865117, guid: e4e5506ca4aeda74eadd3ccb3cb01b49, type: 3}
+  prefab3: {fileID: 6303307862132085356, guid: 49ac6be26133c5e4c9a3b47a684baad4, type: 3}
   second_chance_sound: {fileID: 913423436}
   chance: 0
   bronya: 0

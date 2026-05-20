@@ -17,7 +17,7 @@ public class videoscript : MonoBehaviour
 
     private void Start()
     {
-        audio1 = GameObject.FindGameObjectWithTag("rbd").GetComponent<AudioSource>();
+        //audio1 = GameObject.FindGameObjectWithTag("rbd").GetComponent<AudioSource>();
     }
     public void ReturnByDeath()
     {

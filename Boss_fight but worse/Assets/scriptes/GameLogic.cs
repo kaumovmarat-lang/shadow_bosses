@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
+    public GameObject s1;
+    public GameObject s2;
+    public GameObject s3;
+    public GameObject s4;
+    public GameObject s5;
     public Transform trans;
     public GameObject pos1;
     public GameObject pos2;
@@ -58,7 +63,7 @@ public class GameLogic : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayerStats = GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>();
+      PlayerStats = GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>();
         HP = PlayerStats.maxHP;
         damage = PlayerStats.attack;
         bronya = PlayerStats.bron;
@@ -83,19 +88,20 @@ public class GameLogic : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    Instantiate(prefab1, pos1.transform.position, Quaternion.identity, trans);
+
+                    s1 = Instantiate(prefab1, pos1.transform.position, Quaternion.identity, trans);
                     break;
                 case 1:
-                    Instantiate(prefab1, pos2.transform.position, Quaternion.identity, trans);
+                    s2 = Instantiate(prefab1, pos2.transform.position, Quaternion.identity, trans);
                     break;
                 case 2:
-                    Instantiate(prefab1, pos3.transform.position, Quaternion.identity, trans);
+                    s3 = Instantiate(prefab1, pos3.transform.position, Quaternion.identity, trans);
                     break;
                 case 3:
-                    Instantiate(prefab1, pos4.transform.position, Quaternion.identity, trans);
+                    s4 = Instantiate(prefab1, pos4.transform.position, Quaternion.identity, trans);
                     break;
                 case 4:
-                    Instantiate(prefab1, pos5.transform.position, Quaternion.identity, trans);
+                    s5 = Instantiate(prefab1, pos5.transform.position, Quaternion.identity, trans);
                     break;
             }
             vibor = 1;
@@ -115,19 +121,19 @@ public class GameLogic : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    Instantiate(prefab2, pos1.transform.position, Quaternion.identity, trans);
+                    s1 = Instantiate(prefab2, pos1.transform.position, Quaternion.identity, trans);
                     break;
                 case 1:
-                    Instantiate(prefab2, pos2.transform.position, Quaternion.identity, trans);
+                    s2 = Instantiate(prefab2, pos2.transform.position, Quaternion.identity, trans);
                     break;
                 case 2:
-                    Instantiate(prefab2, pos3.transform.position, Quaternion.identity, trans);
+                    s3 = Instantiate(prefab2, pos3.transform.position, Quaternion.identity, trans);
                     break;
                 case 3:
-                    Instantiate(prefab2, pos4.transform.position, Quaternion.identity, trans);
+                    s4 = Instantiate(prefab2, pos4.transform.position, Quaternion.identity, trans);
                     break;
                 case 4:
-                    Instantiate(prefab2, pos5.transform.position, Quaternion.identity, trans);
+                    s5 = Instantiate(prefab2, pos5.transform.position, Quaternion.identity, trans);
                     break;
             }
             vibor = 2;
@@ -147,19 +153,19 @@ public class GameLogic : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    Instantiate(prefab3, pos1.transform.position, Quaternion.identity, trans);
+                    s1 = Instantiate(prefab3, pos1.transform.position, Quaternion.identity, trans);
                     break;
                 case 1:
-                    Instantiate(prefab3, pos2.transform.position, Quaternion.identity, trans);
+                    s2 = Instantiate(prefab3, pos2.transform.position, Quaternion.identity, trans);
                     break;
                 case 2:
-                    Instantiate(prefab3, pos3.transform.position, Quaternion.identity, trans);
+                    s3 = Instantiate(prefab3, pos3.transform.position, Quaternion.identity, trans);
                     break;
                 case 3:
-                    Instantiate(prefab3, pos4.transform.position, Quaternion.identity, trans);
+                    s4 = Instantiate(prefab3, pos4.transform.position, Quaternion.identity, trans);
                     break;
                 case 4:
-                    Instantiate(prefab3, pos5.transform.position, Quaternion.identity);
+                    s5 = Instantiate(prefab3, pos5.transform.position, Quaternion.identity, trans);
                     break;
             }
             vibor = 3;
@@ -177,6 +183,8 @@ public class GameLogic : MonoBehaviour
     }
     public IEnumerator fight()
     {
+
+        
         makarov.text = "";
         text.text = "";
         aud_fight.Play();
@@ -193,7 +201,7 @@ public class GameLogic : MonoBehaviour
         int result = 0;
         for (int a = 0; a < player.Length; a++)
         {
-            player[a].setActive(false);
+
             if (monster == 0)
             {
                 result = game(player[a], first[hod]);
@@ -226,7 +234,8 @@ public class GameLogic : MonoBehaviour
                         HP -= 10;
                         monster_hp[monster] -= damage;
                         text.text = $"Ничья!\nВы нанесли {damage} урона и получили 10 урона!";
-                    }                        
+                    }
+                    
                     break;
                 case 1:
                     monster_hp[monster] -= damage * 2;
@@ -368,6 +377,25 @@ public class GameLogic : MonoBehaviour
                     for (int b = 0; b < player.Length; b++)
                     {
                         player[b] = 0;
+                        switch (b)
+                        {
+                            case 0:
+                                Destroy(s5);
+                                break;
+                            case 1:
+                                Destroy(s4);
+                                break;
+                            case 2:
+                                Destroy(s3);
+                                break;
+                            case 3:
+                                Destroy(s2);
+                                break;
+                            case 4:
+                                Destroy(s1);
+                                break;
+                        }
+                        yield return new WaitForSeconds(1);
                     }
                     i = 0;
                     monster_alive.SetActive(true);
@@ -477,8 +505,27 @@ public class GameLogic : MonoBehaviour
         for (int a = 0; a < player.Length; a++)
         {
             player[a] = 0;
+            switch (a)
+            {
+                case 0:
+                    Destroy(s5);
+                    break;
+                case 1:
+                    Destroy(s4);
+                    break;
+                case 2:
+                    Destroy(s3);
+                    break;
+                case 3:
+                    Destroy(s2);
+                    break;
+                case 4:
+                    Destroy(s1);
+                    break;
+            }
+            yield return new WaitForSeconds(1);
         }
-            i = 0;
+        i = 0;
         monster_alive.SetActive(true);
         monster_attack.SetActive(false);
         character_alive.SetActive(true);
