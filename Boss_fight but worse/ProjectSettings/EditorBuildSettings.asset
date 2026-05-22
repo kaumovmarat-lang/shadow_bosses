@@ -24,6 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/four.unity
     guid: 33f72fec8ce39aa45a75504eaced11f2
   - enabled: 1
+    path: Assets/Scenes/shop 2.unity
+    guid: 9d4e4fd386baa8f47a3efa847372a6b7
+  - enabled: 1
+    path: Assets/Scenes/final.unity
+    guid: ce08b898d9bb4de4bb7ece7d9720315a
+  - enabled: 1
     path: Assets/Scenes/victory.unity
     guid: e3c930a224a06594c89e12dff8926e1e
   m_configObjects:

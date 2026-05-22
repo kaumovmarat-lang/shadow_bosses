@@ -222,7 +222,25 @@ public class GameLogic : MonoBehaviour
             else { result = game(player[a], fifth[hod]); }
             hod++;
             yield return new WaitForSeconds(3);
-            switch (result)
+            switch (a)
+            {
+                case 0:
+                    Destroy(s1);
+                    break;
+                case 1:
+                    Destroy(s2);
+                    break;
+                case 2:
+                    Destroy(s3);
+                    break;
+                case 3:
+                    Destroy(s4);
+                    break;
+                case 4:
+                    Destroy(s5);
+                    break;
+            }
+                switch (result)
             {
                 case 0:
                     if (bronya) {
@@ -290,7 +308,12 @@ public class GameLogic : MonoBehaviour
                     HP = 1;
                     chance = false;
                     PlayerStats.Chance = false;
-
+                    Destroy(s1);
+                    Destroy(s2);
+                    Destroy(s3);
+                    Destroy(s4);
+                    Destroy(s5);
+                    hp.text = HP.ToString();
                     int deathTurn = PlayerPrefs.GetInt("deathTurn", -1);
                     Console.WriteLine("Сейчас ход " + hod + ", Подсказка в " + deathTurn);
                     if (hod == (deathTurn - 1))
@@ -377,24 +400,6 @@ public class GameLogic : MonoBehaviour
                     for (int b = 0; b < player.Length; b++)
                     {
                         player[b] = 0;
-                        switch (b)
-                        {
-                            case 0:
-                                Destroy(s5);
-                                break;
-                            case 1:
-                                Destroy(s4);
-                                break;
-                            case 2:
-                                Destroy(s3);
-                                break;
-                            case 3:
-                                Destroy(s2);
-                                break;
-                            case 4:
-                                Destroy(s1);
-                                break;
-                        }
                         yield return new WaitForSeconds(1);
                     }
                     i = 0;
@@ -505,25 +510,6 @@ public class GameLogic : MonoBehaviour
         for (int a = 0; a < player.Length; a++)
         {
             player[a] = 0;
-            switch (a)
-            {
-                case 0:
-                    Destroy(s5);
-                    break;
-                case 1:
-                    Destroy(s4);
-                    break;
-                case 2:
-                    Destroy(s3);
-                    break;
-                case 3:
-                    Destroy(s2);
-                    break;
-                case 4:
-                    Destroy(s1);
-                    break;
-            }
-            yield return new WaitForSeconds(1);
         }
         i = 0;
         monster_alive.SetActive(true);

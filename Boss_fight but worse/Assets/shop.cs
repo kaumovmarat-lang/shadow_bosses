@@ -27,7 +27,7 @@ public class shop : MonoBehaviour
    public void Upgrade4()
     {
         vibor = 4;
-        text.text = "Возрождение. В случае поражения, ты верншься к тому моменту боя, где умер.";
+        text.text = "Возрождение. В случае поражения, ты вернёшься к тому моменту боя, где умер.";
     }
     public void Buy()
     {
