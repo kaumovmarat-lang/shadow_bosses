@@ -36,7 +36,7 @@ public class GameLogic : MonoBehaviour
     public GameObject character_attack;
     public GameObject character_dead;
     public GameObject monster_alive;
-    public GameObject monster_attack; 
+    public GameObject monster_attack;
     public AudioSource victory;
     public AudioSource aud_fight;
     public videoscript Return;
@@ -51,19 +51,19 @@ public class GameLogic : MonoBehaviour
     public double HP; // хп игрока
     public int damage; //атака игрока
     public double evildamage = 30; //атака врага (меняется в инспекторе)
-    int[] monster_hp = { 200, 250, 300, 350, 400}; // хп врагов всех поочередно
+    int[] monster_hp = { 200, 250, 300, 350, 400 }; // хп врагов всех поочередно
     public int monster = 0; // какой монстр счетчик
-    
-    public int[] player = {0, 0, 0, 0, 0 }; //действия игрока
+
+    public int[] player = { 0, 0, 0, 0, 0 }; //действия игрока
     int[] first = { 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3 }; //ходы монстров ↓
     int[] second = { 3, 1, 2, 3, 2, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 2, 1 };
     int[] third = { 1, 2, 3, 2, 1, 3, 3, 2, 1, 1, 3, 2, 2, 1, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 3 };
     int[] fourth = { 2, 3, 1, 1, 2, 3, 2, 1, 3, 3, 1, 2, 2, 3, 1, 1, 3, 2, 3, 1, 2, 2, 1, 3, 1, 2, 3, 3, 2, 1, 1, 3, 3, 2, 1, 1, 2, 3, 3, 1, 2, 2, 3, 1, 1, 2, 3 };
     int[] fifth = { 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 3, 2, 2, 3, 1, 3, 1, 2, 2, 1, 3, 1, 2, 3, 3, 2, 1, 2, 3, 1, 1, 2, 3, 3, 2, 1, 2, 1, 3, 1, 2 };  //ходы монстров
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-      PlayerStats = GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>();
+        PlayerStats = GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>();
         HP = PlayerStats.maxHP;
         damage = PlayerStats.attack;
         bronya = PlayerStats.bron;
@@ -71,12 +71,19 @@ public class GameLogic : MonoBehaviour
         hp_Vrag.text = monster_hp[monster].ToString();
         chance = PlayerStats.Chance;
     }
-    // Update is called once per frame
-    void Update()
-    {
 
-        
+    
+    private string GetHintForAction(int action)
+    {
+        switch (action)
+        {
+            case 1: return "Враг использует Быструю атаку...";
+            case 2: return "Враг использует Тяжелую атаку...";
+            case 3: return "Враг использует Контратаку...";
+            default: return "";
+        }
     }
+
     public void chooserock()
     {
         if (i >= player.Length)
@@ -174,7 +181,8 @@ public class GameLogic : MonoBehaviour
             i++;
         }
     }
-    public void StartFight() {
+    public void StartFight()
+    {
         if (i >= 5)
         {
             StartCoroutine(fight());
@@ -184,7 +192,7 @@ public class GameLogic : MonoBehaviour
     public IEnumerator fight()
     {
 
-        
+
         makarov.text = "";
         text.text = "";
         aud_fight.Play();
@@ -226,41 +234,49 @@ public class GameLogic : MonoBehaviour
             {
                 case 0:
                     Destroy(s1);
+                    s1 = null;
                     break;
                 case 1:
                     Destroy(s2);
+                    s2 = null;
                     break;
                 case 2:
                     Destroy(s3);
+                    s3 = null;
                     break;
                 case 3:
                     Destroy(s4);
+                    s4 = null;
                     break;
                 case 4:
                     Destroy(s5);
+                    s5 = null;
                     break;
             }
-                switch (result)
+            switch (result)
             {
                 case 0:
-                    if (bronya) {
+                    if (bronya)
+                    {
                         HP -= 9;
                         monster_hp[monster] -= damage;
                         text.text = $"Ничья!\nВы нанесли {damage} урона и получили 9 урона!";
                     }
-                    else {
+                    else
+                    {
                         HP -= 10;
                         monster_hp[monster] -= damage;
                         text.text = $"Ничья!\nВы нанесли {damage} урона и получили 10 урона!";
                     }
-                    
+
                     break;
                 case 1:
                     monster_hp[monster] -= damage * 2;
                     text.text = $"Чудесная Атака!\nВы нанесли {damage * 2} урона!";
                     break;
                 case 2:
-                    if (bronya) {
+                    if (bronya)
+                    {
                         HP -= evildamage * 0.9;
                         text.text = $"Плохая Атака...\nВы получили {evildamage * 0.9} урона!";
                     }
@@ -269,9 +285,9 @@ public class GameLogic : MonoBehaviour
                         HP -= evildamage;
                         text.text = $"Плохая Атака...\nВы получили {evildamage} урона!";
                     }
-                        break;
+                    break;
                 case 4:
-                    Console.WriteLine("Ошибка?");
+                    Debug.Log("Ошибка?");
                     break;
             }
             aud_fight.Stop();
@@ -291,7 +307,7 @@ public class GameLogic : MonoBehaviour
             }
             else if (HP <= 0)
             {
-                if (!chance) 
+                if (!chance)
                 {
                     PlayerPrefs.SetInt("deathTurn", hod);
                     PlayerPrefs.Save();
@@ -300,6 +316,7 @@ public class GameLogic : MonoBehaviour
                     character_dead.SetActive(true);
                     text.text = "Вы проиграли..!";
                     music.volume = 0.1f;
+                    hod = 0;
                     StartCoroutine(waiter_dead(3));
                 }
                 else
@@ -313,88 +330,32 @@ public class GameLogic : MonoBehaviour
                     Destroy(s3);
                     Destroy(s4);
                     Destroy(s5);
+                    s1 = null; s2 = null; s3 = null; s4 = null; s5 = null; 
                     hp.text = HP.ToString();
                     int deathTurn = PlayerPrefs.GetInt("deathTurn", -1);
-                    Console.WriteLine("Сейчас ход " + hod + ", Подсказка в " + deathTurn);
+                    Debug.Log("Сейчас ход " + hod + ", Подсказка в " + deathTurn);
                     if (hod == (deathTurn - 1))
                     {
                         if (monster == 0)
                         {
-                            switch (first[hod])
-                            {
-                                case 1:
-                                    hint.text = $"Враг использует Быструю атаку...";
-                                    break;
-                                case 2:
-                                    hint.text = $"Враг использует Тяжелую атаку...";
-                                    break;
-                                case 3:
-                                    hint.text = $"Враг использует Контратаку...";
-                                    break;
-                            }
+                            hint.text = GetHintForAction(first[hod]); 
                         }
                         else if (monster == 1)
                         {
-                            switch (second[hod])
-                            {
-                                case 1:
-                                    hint.text = $"Враг использует Быструю атаку...";
-                                    break;
-                                case 2:
-                                    hint.text = $"Враг использует Тяжелую атаку...";
-                                    break;
-                                case 3:
-                                    hint.text = $"Враг использует Контратаку...";
-                                    break;
-                            }
-
+                            hint.text = GetHintForAction(second[hod]); 
                         }
                         else if (monster == 2)
                         {
-                            switch (third[hod])
-                            {
-                                case 1:
-                                    hint.text = $"Враг использует Быструю атаку...";
-                                    break;
-                                case 2:
-                                    hint.text = $"Враг использует Тяжелую атаку...";
-                                    break;
-                                case 3:
-                                    hint.text = $"Враг использует Контратаку...";
-                                    break;
-                            }
+                            hint.text = GetHintForAction(third[hod]); 
                         }
                         else if (monster == 3)
                         {
-                            switch (fourth[hod])
-                            {
-                                case 1:
-                                    hint.text = $"Враг использует Быструю атаку...";
-                                    break;
-                                case 2:
-                                    hint.text = $"Враг использует Тяжелую атаку...";
-                                    break;
-                                case 3:
-                                    hint.text = $"Враг использует Контратаку...";
-                                    break;
-                            }
+                            hint.text = GetHintForAction(fourth[hod]); 
                         }
                         else
                         {
-                            switch (fifth[hod])
-                            {
-                                case 1:
-                                    hint.text = $"Враг использует Контратаку...";
-                                    break;
-                                case 2:
-                                    hint.text = $"Враг использует Быструю атаку...";
-                                    break;
-                                case 3:
-                                    hint.text = $"Враг использует Тяжелую атаку...";
-                                    break;
-                            }
+                            hint.text = GetHintForAction(fifth[hod]); 
                         }
-
                     }
                     else { hint.text = ""; }
                     for (int b = 0; b < player.Length; b++)
@@ -403,6 +364,8 @@ public class GameLogic : MonoBehaviour
                         yield return new WaitForSeconds(1);
                     }
                     i = 0;
+                    hod = 0;
+                    yield return new WaitForSeconds(2f);
                     monster_alive.SetActive(true);
                     monster_attack.SetActive(false);
                     character_alive.SetActive(true);
@@ -421,88 +384,31 @@ public class GameLogic : MonoBehaviour
             }
             else
             {
-                
+
                 int deathTurn = PlayerPrefs.GetInt("deathTurn", -1);
-                Console.WriteLine("Сейчас ход " + hod + ", Подсказка в " + deathTurn);
+                Debug.Log("Сейчас ход " + hod + ", Подсказка в " + deathTurn);
                 if (hod == (deathTurn - 1))
                 {
                     if (monster == 0)
                     {
-                        switch (first[hod])
-                        {
-                            case 1:
-                                hint.text = $"Враг использует Быструю атаку...";
-                                break;
-                            case 2:
-                                hint.text = $"Враг использует Тяжелую атаку...";
-                                break;
-                            case 3:
-                                hint.text = $"Враг использует Контратаку...";
-                                break;
-                        }
+                        hint.text = GetHintForAction(first[hod]);
                     }
                     else if (monster == 1)
                     {
-                        switch (second[hod])
-                        {
-                            case 1:
-                                hint.text = $"Враг использует Быструю атаку...";
-                                break;
-                            case 2:
-                                hint.text = $"Враг использует Тяжелую атаку...";
-                                break;
-                            case 3:
-                                hint.text = $"Враг использует Контратаку...";
-                                break;
-                        }
-
+                        hint.text = GetHintForAction(second[hod]); 
                     }
                     else if (monster == 2)
                     {
-                        switch (third[hod])
-                        {
-                            case 1:
-                                hint.text = $"Враг использует Быструю атаку...";
-                                break;
-                            case 2:
-                                hint.text = $"Враг использует Тяжелую атаку...";
-                                break;
-                            case 3:
-                                hint.text = $"Враг использует Контратаку...";
-                                break;
-                        }
+                        hint.text = GetHintForAction(third[hod]); 
                     }
                     else if (monster == 3)
                     {
-                        switch (fourth[hod])
-                        {
-                            case 1:
-                                hint.text = $"Враг использует Быструю атаку...";
-                                break;
-                            case 2:
-                                hint.text = $"Враг использует Тяжелую атаку...";
-                                break;
-                            case 3:
-                                hint.text = $"Враг использует Контратаку...";
-                                break;
-                        }
+                        hint.text = GetHintForAction(fourth[hod]); 
                     }
                     else
                     {
-                        switch (fifth[hod])
-                        {
-                            case 1:
-                                hint.text = $"Враг использует Контратаку...";
-                                break;
-                            case 2:
-                                hint.text = $"Враг использует Быструю атаку...";
-                                break;
-                            case 3:
-                                hint.text = $"Враг использует Тяжелую атаку...";
-                                break;
-                        }
+                        hint.text = GetHintForAction(fifth[hod]); 
                     }
-
                 }
                 else { hint.text = ""; }
             }
@@ -512,6 +418,8 @@ public class GameLogic : MonoBehaviour
             player[a] = 0;
         }
         i = 0;
+        hod = 0;
+        yield return new WaitForSeconds(2f);
         monster_alive.SetActive(true);
         monster_attack.SetActive(false);
         character_alive.SetActive(true);
@@ -541,6 +449,6 @@ public class GameLogic : MonoBehaviour
     IEnumerator waiter_victory(float sec)
     {
         yield return new WaitForSeconds(sec);
-        SceneManager.LoadScene(scene+1);
+        SceneManager.LoadScene(scene + 1);
     }
 }
