@@ -8,6 +8,7 @@ public class exit : MonoBehaviour
        
         Application.Quit();
     }
+    public void 
 }
 
 
