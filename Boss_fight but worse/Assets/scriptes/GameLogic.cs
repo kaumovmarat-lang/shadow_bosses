@@ -311,6 +311,7 @@ public class GameLogic : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("deathTurn", hod);
                     PlayerPrefs.Save();
+                    
                     character_attack.SetActive(false);
                     character_alive.SetActive(false);
                     character_dead.SetActive(true);
@@ -443,9 +444,10 @@ public class GameLogic : MonoBehaviour
     {
         yield return new WaitForSeconds(sec);
         music.volume = 0;
-        if (scene == 7) {
+        if (scene == 7)
+        {
             int bo = PlayerPrefs.GetInt("deathboss", 0);
-            PlayerPrefs.SetInt("deathboss", bo+1);
+            PlayerPrefs.SetInt("deathboss", bo + 1);
             PlayerPrefs.Save();
         }
         Return.ReturnByDeath();

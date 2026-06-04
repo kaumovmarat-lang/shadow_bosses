@@ -13,6 +13,8 @@ public class dontdestroy : MonoBehaviour
     }
     public void play(int a)
     {
+        PlayerPrefs.DeleteAll(); //не удалять   
+        PlayerPrefs.Save();
         SceneManager.LoadScene(a);
     }
 
