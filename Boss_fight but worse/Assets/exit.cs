@@ -8,6 +8,10 @@ public class exit : MonoBehaviour
 
         Application.Quit();
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> d467ce8a2482ab4df6fbabe054b0e35a08d633e4
 }
 
 
