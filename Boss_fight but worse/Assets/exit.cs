@@ -5,10 +5,10 @@ public class exit : MonoBehaviour
 {
     public void QuitGameFunction()
     {
-       
+
         Application.Quit();
     }
-    public void 
 }
+
 
 
