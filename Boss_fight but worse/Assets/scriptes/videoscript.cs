@@ -14,10 +14,13 @@ public class videoscript : MonoBehaviour
     public float sec = 10;
     public AudioSource audio1;
     public int scene = 0;
+    public dontdestroy main;
 
     private void Start()
     {
         audio1 = GameObject.FindGameObjectWithTag("rbd").GetComponent<AudioSource>();
+        main = GameObject.FindGameObjectWithTag("rbd").GetComponent<dontdestroy>();
+        main.SetScene(scene);
     }
     public void ReturnByDeath()
     {

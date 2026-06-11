@@ -458,4 +458,8 @@ public class GameLogic : MonoBehaviour
         yield return new WaitForSeconds(sec);
         SceneManager.LoadScene(scene + 1);
     }
+    public void ReturnToMap()
+    {
+        SceneManager.LoadScene("map");
+    }
 }

@@ -7,6 +7,7 @@ public class dontdestroy : MonoBehaviour
     public double maxHP = 100;
     public bool bron = false;
     public bool Chance = false;
+    public int scene = 0;
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -34,6 +35,10 @@ public class dontdestroy : MonoBehaviour
     public void AddChance()
     {
         Chance = true;
+    }
+    public void SetScene(int b)
+    {
+        scene = b;
     }
 }
 
