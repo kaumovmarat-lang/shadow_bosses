@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
+    public GameObject retr;
     public GameObject s1;
     public GameObject s2;
     public GameObject s3;
@@ -192,7 +193,7 @@ public class GameLogic : MonoBehaviour
     public IEnumerator fight()
     {
 
-
+        retr.SetActive(false);
         makarov.text = "";
         text.text = "";
         aud_fight.Play();
@@ -379,6 +380,7 @@ public class GameLogic : MonoBehaviour
                     fightButton.SetActive(true);
                     text_background.SetActive(false);
                     text.text = "";
+                    retr.SetActive(true);
                     yield break;
                 }
 
@@ -432,6 +434,7 @@ public class GameLogic : MonoBehaviour
         fightButton.SetActive(true);
         text_background.SetActive(false);
         text.text = "";
+        retr.SetActive(true);
     }
     public int game(int x, int y)
     {
